@@ -1,18 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import smtplib
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from config import *
 
 
-def send_email(subject, html):
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
+def send_email(subject):
+    msg = MIMEText(subject,'plain','utf-8')
+    msg['Subject'] = '新成绩'
     msg['From'] = smtp_username
     msg['To'] = smtp_to
-    msg.attach(MIMEText(html, 'html', 'utf-8'))
     if smtp_ssl:
         s = smtplib.SMTP_SSL(smtp_server)
     else:
